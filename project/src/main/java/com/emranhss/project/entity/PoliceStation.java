@@ -3,15 +3,43 @@ package com.emranhss.project.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name ="policestations" )
+@Table(name = "policeStations")
+
 public class PoliceStation {
 
-   @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-   @Column(length = 50,nullable = false)
+    @Column(length = 50, nullable = false)
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "district_id")
+
+    private District district;
+
+    public PoliceStation() {
+    }
+
+    public PoliceStation(int id, String name, District district) {
+        this.id = id;
+        this.name = name;
+        this.district = district;
+    }
+
+    public PoliceStation(String name, District district) {
+        this.name = name;
+        this.district = district;
+    }
+
+    public PoliceStation(String name) {
+        this.name = name;
+    }
+
+    public PoliceStation(District district) {
+        this.district = district;
+    }
 
     public int getId() {
         return id;
@@ -29,8 +57,12 @@ public class PoliceStation {
         this.name = name;
     }
 
-    public PoliceStation(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public District getDistrict() {
+        return district;
     }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
 }
