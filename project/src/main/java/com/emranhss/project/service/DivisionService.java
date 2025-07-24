@@ -1,5 +1,6 @@
 package com.emranhss.project.service;
 
+import com.emranhss.project.dto.DivisionResponse;
 import com.emranhss.project.entity.Division;
 import com.emranhss.project.repository.IDivisionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ public class DivisionService {
         return divisionRepository.findAll();
     }
 
-    public List<DivisionResponseDTO> getAllDivisionDTOs() {
+    public List<DivisionResponse> getAllDivisionDTOs() {
         return getAllDivisions().stream().map(div -> {
-            DivisionResponseDTO dto = new DivisionResponseDTO();
+            DivisionResponse dto = new DivisionResponse();
             dto.setId(div.getId());
             dto.setName(div.getName());
 
