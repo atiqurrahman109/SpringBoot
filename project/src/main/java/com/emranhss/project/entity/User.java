@@ -3,7 +3,7 @@ package com.emranhss.project.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="users")
+@Table(name= "users")
 
 public class User {
     @Id
