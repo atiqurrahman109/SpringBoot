@@ -5,20 +5,12 @@ import java.util.List;
 public class DistrictResponseDTO {
 
 
-    private long id;
+    private int id;
     private String name;
     private List<Integer> policeStations;
 
     // Getters and setters
 
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -34,5 +26,13 @@ public class DistrictResponseDTO {
 
     public void setPoliceStations(List<Integer> policeStations) {
         this.policeStations = policeStations;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

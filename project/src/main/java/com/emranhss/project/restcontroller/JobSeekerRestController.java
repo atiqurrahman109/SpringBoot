@@ -25,23 +25,12 @@ public class JobSeekerRestController {
     @PostMapping("")
     public ResponseEntity<Map<String, String>> registerJobSeeker(
             @RequestPart(value = "user") String userJson,
-<<<<<<< HEAD
             @RequestPart(value = "jobSeeker") String jobSeekerJson,
             @RequestParam(value = "photo") MultipartFile file
     ) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         User user = objectMapper.readValue(userJson, User.class);
         JobSeeker jobSeeker = objectMapper.readValue(jobSeekerJson, JobSeeker.class);
-=======
-            @RequestPart(value = "jobseeker") String jobSeekerJson,
-            @RequestPart(value = "photo") MultipartFile file
-
-    )
-        throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        User user=objectMapper.readValue(userJson,User.class);
-        JobSeeker jobSeeker=objectMapper.readValue(jobSeekerJson,JobSeeker.class);
->>>>>>> 7547c969975225260de50a971e7521854135bf4b
 
         try {
             userService.registerJobSeeker(user, file, jobSeeker);
@@ -58,5 +47,6 @@ public class JobSeekerRestController {
 
 
     }
+
 
 }

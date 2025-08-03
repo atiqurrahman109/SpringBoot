@@ -1,7 +1,9 @@
 package com.emranhss.project.service;
 
 import com.emranhss.project.dto.DivisionResponse;
+import com.emranhss.project.entity.Country;
 import com.emranhss.project.entity.Division;
+import com.emranhss.project.repository.ICountryRepo;
 import com.emranhss.project.repository.IDivisionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,12 @@ import java.util.List;
 public class DivisionService {
 
     @Autowired
-    private IDivisionRepo divisionRepository;
+    private IDivisionRepo divisionRepo;
+    @Autowired
+    private ICountryRepo countryRepo;
 
     public List<Division> getAllDivisions() {
-        return divisionRepository.findAll();
+        return divisionRepo.findAll();
     }
 
     public List<DivisionResponse> getAllDivisionDTOs() {
@@ -27,6 +31,7 @@ public class DivisionService {
             List<Integer> districtIds = div.getDistricts().stream()
                     .map(d -> d.getId())
                     .toList();
+
             dto.setDistricts(districtIds);
 
             return dto;
@@ -34,7 +39,15 @@ public class DivisionService {
     }
 
     public Division saveDivision(Division division) {
-        return divisionRepository.save(division);
+        if(division.getCountry()    != null) {
+            long countryId = division.getCountry().getId();
+            Country country = countryRepo.findById(countryId)
+                    .orElseThrow(() -> new RuntimeException("Country not found WITH ID: " + countryId));
+
+            division.setCountry(country);
+        }
+
+        return IDivisionRepo.save(division);
     }
 
 }

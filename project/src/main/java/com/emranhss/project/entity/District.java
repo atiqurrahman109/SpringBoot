@@ -11,7 +11,7 @@ import java.util.List;
 public class District {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(length = 50, nullable = false)
     private String name;
@@ -27,7 +27,7 @@ public class District {
     public District() {
     }
 
-    public District(long id, String name, List<PoliceStation> policeStations, Division division) {
+    public District(int id, String name, List<PoliceStation> policeStations, Division division) {
         this.id = id;
         this.name = name;
         this.policeStations = policeStations;
@@ -38,11 +38,11 @@ public class District {
         this.policeStations = policeStations;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -3,6 +3,7 @@ package com.emranhss.project.service;
 
 
 
+import com.emranhss.project.dto.AuthenticationResponse;
 import com.emranhss.project.entity.JobSeeker;
 import com.emranhss.project.entity.Role;
 import com.emranhss.project.entity.Token;
@@ -244,8 +245,7 @@ public class UserService implements UserDetailsService {
 
     private void removeAllTokenByUser(User user) {
 
-        List<Token> validTokens = tokenRepo.findAllTokenByUser((user.getId());
-
+        List<Token> validTokens = tokenRepo.findAllTokenByUser(user.getId());
         if (validTokens.isEmpty()) {
             return;
         }

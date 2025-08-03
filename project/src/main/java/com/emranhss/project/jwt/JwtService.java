@@ -11,8 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import javax.naming.spi.Resolver;
-import java.util.Base64;
+
 import java.util.Date;
 import java.util.function.Function;
 
@@ -58,10 +57,10 @@ public String extractUserName(String token) {
 }
 
 // extract a specific claims from the token claims
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    public <T> T extractClaim(String token, Function<Claims, T> resolver) {
 
         Claims claims = extractAllClaims(token);
-        return Resolver.apply(claims);
+        return resolver.apply(claims);
     }
 
     private Date extractExpiration(String token) {
