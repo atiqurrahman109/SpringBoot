@@ -1,5 +1,6 @@
 package com.emranhss.project.restcontroller;
 
+
 import com.emranhss.project.entity.JobSeeker;
 import com.emranhss.project.entity.User;
 import com.emranhss.project.service.UserService;
@@ -11,10 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 
 @RestController
 @RequestMapping("/api/jobseeker/")
@@ -26,12 +25,23 @@ public class JobSeekerRestController {
     @PostMapping("")
     public ResponseEntity<Map<String, String>> registerJobSeeker(
             @RequestPart(value = "user") String userJson,
+<<<<<<< HEAD
             @RequestPart(value = "jobSeeker") String jobSeekerJson,
             @RequestParam(value = "photo") MultipartFile file
     ) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         User user = objectMapper.readValue(userJson, User.class);
         JobSeeker jobSeeker = objectMapper.readValue(jobSeekerJson, JobSeeker.class);
+=======
+            @RequestPart(value = "jobseeker") String jobSeekerJson,
+            @RequestPart(value = "photo") MultipartFile file
+
+    )
+        throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        User user=objectMapper.readValue(userJson,User.class);
+        JobSeeker jobSeeker=objectMapper.readValue(jobSeekerJson,JobSeeker.class);
+>>>>>>> 7547c969975225260de50a971e7521854135bf4b
 
         try {
             userService.registerJobSeeker(user, file, jobSeeker);
