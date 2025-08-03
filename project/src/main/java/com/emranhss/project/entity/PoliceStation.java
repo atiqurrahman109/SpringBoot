@@ -22,25 +22,6 @@ public class PoliceStation {
     public PoliceStation() {
     }
 
-    public PoliceStation(int id, String name, District district) {
-        this.id = id;
-        this.name = name;
-        this.district = district;
-    }
-
-    public PoliceStation(String name, District district) {
-        this.name = name;
-        this.district = district;
-    }
-
-    public PoliceStation(String name) {
-        this.name = name;
-    }
-
-    public PoliceStation(District district) {
-        this.district = district;
-    }
-
     public int getId() {
         return id;
     }
@@ -64,5 +45,4 @@ public class PoliceStation {
     public void setDistrict(District district) {
         this.district = district;
     }
-
 }

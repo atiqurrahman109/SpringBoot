@@ -2,7 +2,8 @@ package com.emranhss.project.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.sql.Date;
+
 
 @Entity
 public class JobSeeker {
@@ -13,14 +14,29 @@ public class JobSeeker {
     private String name;
     private String email;
     private String phone;
-    private String address;
     private String gender;
-    private LocalDate dateOfBirth;
+    private String address;
+    private Date dateOfBirth;
     private String photo;
 
     @OneToOne
-    @JoinColumn(name="user_id",nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public JobSeeker() {
+    }
+
+    public JobSeeker(Long id, String name, String email, String phone, String gender, String address, Date dateOfBirth, String photo, User user) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.gender = gender;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.photo = photo;
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -54,14 +70,6 @@ public class JobSeeker {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -70,11 +78,19 @@ public class JobSeeker {
         this.gender = gender;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

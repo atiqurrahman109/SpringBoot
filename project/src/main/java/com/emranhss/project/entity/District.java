@@ -8,11 +8,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "district")
-
 public class District {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(length = 50, nullable = false)
     private String name;
@@ -28,21 +27,22 @@ public class District {
     public District() {
     }
 
-    public District(int id, String name, List<PoliceStation> policeStations) {
+    public District(long id, String name, List<PoliceStation> policeStations, Division division) {
         this.id = id;
         this.name = name;
         this.policeStations = policeStations;
+        this.division = division;
     }
 
     public District(List<PoliceStation> policeStations) {
         this.policeStations = policeStations;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -69,5 +69,4 @@ public class District {
     public void setDivision(Division division) {
         this.division = division;
     }
-
 }

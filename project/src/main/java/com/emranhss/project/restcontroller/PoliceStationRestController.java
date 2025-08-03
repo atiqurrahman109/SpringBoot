@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("/api/policestation/")
 public class PoliceStationRestController {
 
-
     @Autowired
     private PoliceStationService policeStationService;
 
@@ -38,13 +37,6 @@ public class PoliceStationRestController {
     public void deleteById(@PathVariable Integer id) {
 
         policeStationService.deleteById(id);
-    }
-
-    @PutMapping("{id}")
-    public void Update(@RequestBody PoliceStation ps) {
-
-        policeStationService.saveOrUpdate(ps);
-
     }
 
 }

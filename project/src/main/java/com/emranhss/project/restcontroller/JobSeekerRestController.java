@@ -8,10 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,19 +22,16 @@ public class JobSeekerRestController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @PostMapping("")
-    public ResponseEntity<Map<String,String>> registerJobSeeker(
+    public ResponseEntity<Map<String, String>> registerJobSeeker(
             @RequestPart(value = "user") String userJson,
-            @RequestPart(value = "jobseeker") String jobSeekerJson,
-            @RequestPart(value = "photo")MultipartFile file
-
-    )
-        throws JsonProcessingException{
-        objectMapper objectMapper = new objectMapper();
-        User user=objectMapper.readValue(jobSeekerJson,jobSeeker.class);
+            @RequestPart(value = "jobSeeker") String jobSeekerJson,
+            @RequestParam(value = "photo") MultipartFile file
+    ) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        User user = objectMapper.readValue(userJson, User.class);
+        JobSeeker jobSeeker = objectMapper.readValue(jobSeekerJson, JobSeeker.class);
 
         try {
             userService.registerJobSeeker(user, file, jobSeeker);
@@ -51,7 +45,8 @@ public class JobSeekerRestController {
             errorResponse.put("Message", "User Add Faild " + e);
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
 
+
+    }
 
 }

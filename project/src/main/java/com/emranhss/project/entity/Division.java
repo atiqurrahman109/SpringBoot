@@ -24,14 +24,23 @@ public class Division {
     private List<District> districts;
 
     // Getters & Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
 
-    public List<District> getDistricts() { return districts; }
-    public void setDistricts(List<District> districts) { this.districts = districts; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Country getCountry() {
         return country;
@@ -39,5 +48,13 @@ public class Division {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public List<District> getDistricts() {
+        return districts;
+    }
+
+    public void setDistricts(List<District> districts) {
+        this.districts = districts;
     }
 }

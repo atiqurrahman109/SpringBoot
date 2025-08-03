@@ -10,16 +10,17 @@ import java.util.List;
 @Service
 public class EducationService {
     @Autowired
-    private EducationRepo educationRepo;
+    private EducationRepo educationRepository;
 
-    public List<Education>getByJobSeekerId(long jobSeekerId){
-        return educationRepo.findByJobSeekerId(jobSeekerId);
+    public List<Education> getByJobSeekerId(Long jobSeekerId) {
+        return educationRepository.findByJobSeekerId(jobSeekerId);
     }
 
-    public Education save(Education education){
-        return educationRepo.save(education);
+    public Education save(Education education) {
+        return educationRepository.save(education);
     }
-    public void delete(long id){
-        educationRepo.deleteById(id);
+
+    public void delete(Long id) {
+        educationRepository.deleteById(id);
     }
 }

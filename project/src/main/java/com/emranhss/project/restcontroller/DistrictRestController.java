@@ -41,5 +41,4 @@ public class DistrictRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
 }

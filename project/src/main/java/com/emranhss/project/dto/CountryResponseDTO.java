@@ -8,6 +8,7 @@ public class CountryResponseDTO {
 
     // Getters & setters
 
+
     public int getId() {
         return id;
     }

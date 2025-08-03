@@ -1,8 +1,10 @@
 package com.emranhss.project.dto;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
-public class DivisionResponse {
+import java.util.List;
+@Service
+public class DivisionResponse{
 
 
     private int id;
@@ -17,19 +19,19 @@ public class DivisionResponse {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<Integer> getDistricts() {
         return districts;
     }
 
     public void setDistricts(List<Integer> districts) {
         this.districts = districts;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

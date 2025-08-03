@@ -10,5 +10,5 @@ import java.util.List;
 public interface EducationRepo extends JpaRepository<Education, Long> {
 List<Education>findByJobSeekerId(Long jobSeekerId);
 
-    List<Education> jobSeekerId(Long jobSeekerId);
+
 }
