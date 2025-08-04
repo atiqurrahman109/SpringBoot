@@ -40,14 +40,14 @@ public class DivisionService {
 
     public Division saveDivision(Division division) {
         if(division.getCountry()    != null) {
-            long countryId = division.getCountry().getId();
+            int countryId = division.getCountry().getId();
             Country country = countryRepo.findById(countryId)
                     .orElseThrow(() -> new RuntimeException("Country not found WITH ID: " + countryId));
 
             division.setCountry(country);
         }
 
-        return IDivisionRepo.save(division);
+        return divisionRepo.save(division);
     }
 
 }
