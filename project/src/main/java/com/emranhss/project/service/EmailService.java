@@ -18,15 +18,20 @@ public class EmailService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendSimpleEmail(String to, String subject, String body) throws MessagingException {
-        MimeMessage message = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+
+    public  void sendSimpleEmail(String to, String subject, String body) throws MessagingException {
+
+        MimeMessage message=javaMailSender.createMimeMessage();
+        MimeMessageHelper helper=new MimeMessageHelper(message, true);
         helper.setTo(to);
         helper.setSubject(subject);
-        helper.setText(body, true);
+        helper.setText(body,   true);
 
         javaMailSender.send(message);
+
     }
+
 
 
 

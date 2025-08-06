@@ -4,12 +4,15 @@ package com.emranhss.project.restcontroller;
 import com.emranhss.project.dto.AuthenticationResponse;
 import com.emranhss.project.entity.User;
 
+import com.emranhss.project.repository.ITokenRepo;
+import com.emranhss.project.service.AuthService;
 import com.emranhss.project.service.UserService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +28,12 @@ import java.util.Map;
 
     public class UserRestController {
 
+
     @Autowired
-    private UserService userService;
+    private AuthService AuthService;
+
+    @Autowired
+    ITokenRepo tokenRepo;
 
 
     @PostMapping
@@ -38,7 +45,7 @@ import java.util.Map;
         User user = objectMapper.readValue(userJson, User.class);
 
         try {
-            userService.saveOrUpdate(user, file);
+            AuthService.saveOrUpdate(user, file);
             Map<String, String> response = new HashMap<>();
             response.put("Message", "User Added Successfully ");
 
@@ -54,25 +61,44 @@ import java.util.Map;
     }
 
 
-    @GetMapping("")
+    @GetMapping("all")
     public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.findAll();
+        List<User> users = AuthService.findAll();
         return ResponseEntity.ok(users);
 
     }
 
 
-    @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody User request) {
-        return ResponseEntity.ok(userService.authencate(request));
+    @PostMapping("login")
+    public ResponseEntity<AuthenticationResponse>  login(@RequestBody User request){
+        return ResponseEntity.ok(AuthService.authenticate(request));
 
     }
 
 
     @GetMapping("/active/{id}")
-    public ResponseEntity<String> activeUser(@PathVariable("id") int id) {
+    public ResponseEntity<String> activeUser(@PathVariable("id") int id){
 
-        String response = userService.activeUser(id);
-        return ResponseEntity.ok(response);
+        String response= AuthService.activeUser(id);
+        return  ResponseEntity.ok(response);
+    }
+
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        final String authHeader = request.getHeader("Authorization");
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.badRequest().body("Missing or invalid Authorization header.");
+        }
+
+        String token = authHeader.substring(7);  // Strip "Bearer "
+
+        tokenRepo.findByToken(token).ifPresent(savedToken -> {
+            savedToken.setLogOut(true);  // Mark token as logged out
+            tokenRepo.save(savedToken);
+        });
+
+        return ResponseEntity.ok("Logged out successfully.");
     }
 }
