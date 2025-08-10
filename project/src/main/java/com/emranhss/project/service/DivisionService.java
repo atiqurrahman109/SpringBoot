@@ -18,21 +18,6 @@ public class DivisionService {
         return divisionRepository.findAll();
     }
 
-    public List<DivisionResponse> getAllDivisionDTOs() {
-        return getAllDivisions().stream().map(div -> {
-            DivisionResponse dto = new DivisionResponse();
-            dto.setId(div.getId());
-            dto.setName(div.getName());
-
-            List<Integer> districtIds = div.getDistricts().stream()
-                    .map(d -> d.getId())
-                    .toList();
-            dto.setDistricts(districtIds);
-
-            return dto;
-        }).toList();
-    }
-
     public Division saveDivision(Division division) {
         return divisionRepository.save(division);
     }

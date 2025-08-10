@@ -20,6 +20,10 @@ public class JobSeeker {
     private String photo;
 
     @OneToOne
+    @JoinColumn(name = "educations", nullable = false)
+    private Education educations;
+
+    @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

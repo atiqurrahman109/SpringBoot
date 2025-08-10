@@ -1,20 +1,13 @@
 package com.emranhss.project.restcontroller;
 
-<<<<<<< HEAD
+
+import com.emranhss.project.dto.AuthenticationResponseDTO;
 import com.emranhss.project.entity.User;
-
-import com.emranhss.project.service.UserService;
-
+import com.emranhss.project.repository.ITokenRepo;
+import com.emranhss.project.service.AuthService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityNotFoundException;
-=======
-
-import com.emranhss.project.entity.User;
-import com.emranhss.project.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
->>>>>>> 7547c969975225260de50a971e7521854135bf4b
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,83 +18,54 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/api/user/")
-<<<<<<< HEAD
-
-
-
-
-    public class UserRestController {
-
-
-=======
-@CrossOrigin("*")
-
 public class UserRestController {
 
->>>>>>> 7547c969975225260de50a971e7521854135bf4b
     @Autowired
-    private UserService userService;
+    private AuthService authService;
+
+    @Autowired
+    ITokenRepo  tokenRepository;
 
 
     @PostMapping
     public ResponseEntity<Map<String, String>> saveUser(
             @RequestPart(value = "user") String userJson,
-<<<<<<< HEAD
             @RequestParam(value = "photo") MultipartFile file
     ) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         User user = objectMapper.readValue(userJson, User.class);
 
         try {
-            userService.saveOrUpdate(user, file);
+            authService.saveOrUpdate(user, file);
             Map<String, String> response = new HashMap<>();
             response.put("Message", "User Added Successfully ");
 
-=======
-            @RequestParam(value = "photo")MultipartFile file
-            )
-            throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        User user = objectMapper.readValue(userJson, User.class);
-
-
-        try {
-            userService.saveOrUpdate(user, file);
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "User has been saved successfully");
->>>>>>> 7547c969975225260de50a971e7521854135bf4b
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
 
             Map<String, String> errorResponse = new HashMap<>();
-<<<<<<< HEAD
             errorResponse.put("Message", "User Add Faild " + e);
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-=======
-            errorResponse.put("message", e.getMessage());
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-
->>>>>>> 7547c969975225260de50a971e7521854135bf4b
         }
 
 
     }
 
-<<<<<<< HEAD
 
-    @GetMapping("")
+    @GetMapping("all")
     public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.findAll();
+        List<User> users = authService.findAll();
         return ResponseEntity.ok(users);
 
     }
 
 
-    @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse>  login(@RequestBody User request){
-        return ResponseEntity.ok(userService.authencate(request));
+    @PostMapping("login")
+    public ResponseEntity<AuthenticationResponseDTO>  login(@RequestBody User request){
+        return ResponseEntity.ok(authService.authenticate(request));
 
     }
 
@@ -109,19 +73,28 @@ public class UserRestController {
     @GetMapping("/active/{id}")
     public ResponseEntity<String> activeUser(@PathVariable("id") int id){
 
-        String response= userService.activeUser(id);
+        String response= authService.activeUser(id);
         return  ResponseEntity.ok(response);
     }
 
-}
-=======
-        @GetMapping("")
-        public ResponseEntity<List<User>> getAllUser () {
-            List<User> users = userService.findAll();
-            return ResponseEntity.ok(users);
 
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        final String authHeader = request.getHeader("Authorization");
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.badRequest().body("Missing or invalid Authorization header.");
         }
 
+        String token = authHeader.substring(7);  // Strip "Bearer "
+
+        tokenRepository.findByToken(token).ifPresent(savedToken -> {
+            savedToken.setLogout(true);  // Mark token as logged out
+            tokenRepository.save(savedToken);
+        });
+
+        return ResponseEntity.ok("Logged out successfully.");
     }
 
->>>>>>> 7547c969975225260de50a971e7521854135bf4b
+
+}

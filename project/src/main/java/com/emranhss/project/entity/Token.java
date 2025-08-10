@@ -9,11 +9,11 @@ public class Token {
     private long id;
     private String token;
     @Column(name = "is_log_out")
-    private boolean logOut;
+    private boolean logout;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private  User user;
 
     public Token() {
     }
@@ -34,12 +34,12 @@ public class Token {
         this.token = token;
     }
 
-    public boolean isLogOut() {
-        return logOut;
+    public boolean isLogout() {
+        return logout;
     }
 
-    public void setLogOut(boolean logOut) {
-        this.logOut = logOut;
+    public void setLogout(boolean logout) {
+        this.logout = logout;
     }
 
     public User getUser() {

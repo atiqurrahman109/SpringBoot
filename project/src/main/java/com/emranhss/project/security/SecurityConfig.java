@@ -34,9 +34,10 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(req ->
-                        req.requestMatchers("/api/user/**", "/images/**", "/api/jobseeker/","/api/user/active/**", "/api/user/login").permitAll()
-                                .anyRequest().authenticated()
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers("/api/user/login","/auth/login", "/api/jobseeker/","/images/**", "/api/user/active/**").permitAll()
+                        .requestMatchers("/api/user/all", "/api/jobseeker/profile", "/api/education/all").hasRole("JOBSEEKER")
+                        .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)
                 .sessionManagement(session ->
@@ -73,4 +74,6 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
 }

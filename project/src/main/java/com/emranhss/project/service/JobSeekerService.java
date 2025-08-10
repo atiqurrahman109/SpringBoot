@@ -22,32 +22,26 @@ import java.util.Optional;
 @Service
 public class JobSeekerService {
     @Autowired
-    private UserService userService;
+    private JobSeekerRepo jobSeekerRepo;
 
-    @PostMapping("")
-    public ResponseEntity<Map<String, String>> registerJobSeeker(
-            @RequestPart(value = "user") String userJson,
-            @RequestPart(value = "jobSeeker") String jobSeekerJson,
-            @RequestParam(value = "photo") MultipartFile file
-    ) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        User user = objectMapper.readValue(userJson, User.class);
-        JobSeeker jobSeeker = objectMapper.readValue(jobSeekerJson, JobSeeker.class);
-
-        try {
-            userService.registerJobSeeker(user, file, jobSeeker);
-            Map<String, String> response = new HashMap<>();
-            response.put("Message", "User Added Successfully ");
-
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("Message", "User Add Faild " + e);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-
+    public List<JobSeeker> getAll() {
+        return jobSeekerRepo.findAll();
     }
 
+    public Optional<JobSeeker> getById(Long id) {
+        return jobSeekerRepo.findById(id);
+    }
+
+    public JobSeeker save(JobSeeker jobSeeker) {
+        return jobSeekerRepo.save(jobSeeker);
+    }
+
+    public void delete(Long id) {
+        jobSeekerRepo.deleteById(id);
+    }
+
+    public JobSeeker getProfileByUserId(int userId) {
+        return jobSeekerRepo.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Job Seeker not found"));
+    }
 }
