@@ -1,12 +1,26 @@
 package com.emranhss.project.restcontroller;
 
 
+<<<<<<< HEAD
 import com.emranhss.project.dto.AuthenticationResponseDTO;
 import com.emranhss.project.entity.User;
 import com.emranhss.project.repository.ITokenRepo;
 import com.emranhss.project.service.AuthService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+=======
+import com.emranhss.project.dto.AuthenticationResponse;
+import com.emranhss.project.entity.User;
+
+import com.emranhss.project.repository.ITokenRepo;
+import com.emranhss.project.service.AuthService;
+import com.emranhss.project.service.UserService;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +35,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user/")
+<<<<<<< HEAD
 public class UserRestController {
 
     @Autowired
@@ -28,6 +43,17 @@ public class UserRestController {
 
     @Autowired
     ITokenRepo  tokenRepository;
+=======
+
+    public class UserRestController {
+
+
+    @Autowired
+    private AuthService AuthService;
+
+    @Autowired
+    ITokenRepo tokenRepo;
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 
 
     @PostMapping
@@ -39,7 +65,11 @@ public class UserRestController {
         User user = objectMapper.readValue(userJson, User.class);
 
         try {
+<<<<<<< HEAD
             authService.saveOrUpdate(user, file);
+=======
+            AuthService.saveOrUpdate(user, file);
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
             Map<String, String> response = new HashMap<>();
             response.put("Message", "User Added Successfully ");
 
@@ -57,15 +87,24 @@ public class UserRestController {
 
     @GetMapping("all")
     public ResponseEntity<List<User>> getAllUsers() {
+<<<<<<< HEAD
         List<User> users = authService.findAll();
+=======
+        List<User> users = AuthService.findAll();
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
         return ResponseEntity.ok(users);
 
     }
 
 
     @PostMapping("login")
+<<<<<<< HEAD
     public ResponseEntity<AuthenticationResponseDTO>  login(@RequestBody User request){
         return ResponseEntity.ok(authService.authenticate(request));
+=======
+    public ResponseEntity<AuthenticationResponse>  login(@RequestBody User request){
+        return ResponseEntity.ok(AuthService.authenticate(request));
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 
     }
 
@@ -73,7 +112,11 @@ public class UserRestController {
     @GetMapping("/active/{id}")
     public ResponseEntity<String> activeUser(@PathVariable("id") int id){
 
+<<<<<<< HEAD
         String response= authService.activeUser(id);
+=======
+        String response= AuthService.activeUser(id);
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
         return  ResponseEntity.ok(response);
     }
 
@@ -87,6 +130,7 @@ public class UserRestController {
         }
 
         String token = authHeader.substring(7);  // Strip "Bearer "
+<<<<<<< HEAD
 
         tokenRepository.findByToken(token).ifPresent(savedToken -> {
             savedToken.setLogout(true);  // Mark token as logged out
@@ -98,3 +142,14 @@ public class UserRestController {
 
 
 }
+=======
+
+        tokenRepo.findByToken(token).ifPresent(savedToken -> {
+            savedToken.setLogOut(true);  // Mark token as logged out
+            tokenRepo.save(savedToken);
+        });
+
+        return ResponseEntity.ok("Logged out successfully.");
+    }
+}
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550

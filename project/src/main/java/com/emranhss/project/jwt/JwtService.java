@@ -11,7 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+<<<<<<< HEAD
 import javax.naming.spi.Resolver;
+=======
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 
 import java.util.Date;
 import java.util.function.Function;
@@ -58,12 +61,16 @@ public class JwtService {
 
     public String extractUserName(String token) {
 
+<<<<<<< HEAD
         return extractClaim(token, Claims::getSubject);
 
     }
 
 
     // Extract a specific Claim from the Token Claims
+=======
+// extract a specific claims from the token claims
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
     public <T> T extractClaim(String token, Function<Claims, T> resolver) {
 
         Claims claims = extractAllClaims(token);

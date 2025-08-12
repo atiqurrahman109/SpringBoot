@@ -1,13 +1,16 @@
 package com.emranhss.project.restcontroller;
 
-
 import com.emranhss.project.entity.JobSeeker;
 import com.emranhss.project.entity.User;
 import com.emranhss.project.repository.IUserRepo;
 import com.emranhss.project.repository.JobSeekerRepo;
 import com.emranhss.project.service.AuthService;
 import com.emranhss.project.service.JobSeekerService;
+<<<<<<< HEAD
 import com.emranhss.project.service.UserService;
+=======
+
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +75,7 @@ public class JobSeekerRestController {
 
     }
 
+<<<<<<< HEAD
 //    @GetMapping("/profile")
 //    public ResponseEntity<?> getMyProfile() {
 //        // 1. Get current logged-in user email
@@ -87,6 +91,8 @@ public class JobSeekerRestController {
 //
 //        return ResponseEntity.ok(jobSeeker);
 //    }
+=======
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 
     @GetMapping("/profile")
     public ResponseEntity<?> getProfile(Authentication authentication) {
@@ -100,4 +106,9 @@ public class JobSeekerRestController {
     }
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 }

@@ -1,6 +1,10 @@
 package com.emranhss.project.service;
 
+<<<<<<< HEAD
 import com.emranhss.project.dto.AuthenticationResponseDTO;
+=======
+import com.emranhss.project.dto.AuthenticationResponse;
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 import com.emranhss.project.entity.JobSeeker;
 import com.emranhss.project.entity.Role;
 import com.emranhss.project.entity.Token;
@@ -28,14 +32,23 @@ import java.util.UUID;
 
 @Service
 public class AuthService {
+<<<<<<< HEAD
 
     @Autowired
     private  PasswordEncoder passwordEncoder;
+=======
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 
     @Autowired
     private IUserRepo userRepo;
     @Autowired
+<<<<<<< HEAD
     private ITokenRepo tokenRepository;
+=======
+    private ITokenRepo tokenRepo;
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 
     @Autowired
     private EmailService emailService;
@@ -216,31 +229,53 @@ public class AuthService {
     private void saveUserToken(String jwt, User user) {
         Token token = new Token();
         token.setToken(jwt);
+<<<<<<< HEAD
         token.setLogout(false);
         token.setUser(user);
 
         tokenRepository.save(token);
+=======
+        token.setLogOut(false);
+        token.setUser(user);
+
+        tokenRepo.save(token);
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 
     }
 
     private void removeAllTokenByUser(User user) {
 
+<<<<<<< HEAD
         List<Token> validTokens = tokenRepository.findAllTokenByUser(user.getId());
+=======
+        List<Token> validTokens = tokenRepo.findAllTokenByUser(user.getId());
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 
         if (validTokens.isEmpty()) {
             return;
         }
         validTokens.forEach(t -> {
+<<<<<<< HEAD
             t.setLogout(true);
         });
 
         tokenRepository.saveAll(validTokens);
+=======
+            t.setLogOut(true);
+        });
+
+        tokenRepo.saveAll(validTokens);
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
 
     }
 
 
     // It is Login Method
+<<<<<<< HEAD
     public AuthenticationResponseDTO authenticate(User request) {
+=======
+    public AuthenticationResponse authenticate(User request) {
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
         // Authenticate Username & Password
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -268,7 +303,11 @@ public class AuthService {
         saveUserToken(jwt, user);
 
         // Return Authentication Response
+<<<<<<< HEAD
         return new AuthenticationResponseDTO(jwt, "User Login Successful");
+=======
+        return new AuthenticationResponse(jwt, "User Login Successful");
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
     }
 
 
@@ -290,6 +329,10 @@ public class AuthService {
 
     }
 
+<<<<<<< HEAD
 
 
 }
+=======
+}
+>>>>>>> 0e3f204ff0631cca9428023e610dc5f1a7106550
