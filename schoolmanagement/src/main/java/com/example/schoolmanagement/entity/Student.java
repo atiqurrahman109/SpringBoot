@@ -1,39 +1,38 @@
-package entity;
+package com.example.schoolmanagement.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-import java.util.List;
+
 
 @Entity
-@Table(name ="Students" )
+@Table(name = "students")
 public class Student {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-   private Integer id;          // Optional - for update cases
-  private String firstName;
-  private  String lastName;
-  private String  dob;           // ISO date string, e.g. '2005-08-20'
-  private String  gender;
-  private String  email;
-  private String  phone;
-  private String  address;
-private String clas;
-private String section;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;          // Optional - for update cases
+    private String firstName;
+    private String lastName;
+    private String dob;           // ISO date string, e.g. '2005-08-20'
+    private String gender;
+    private String email;
+    private String phone;
+    private String address;
+    private String clas;
+    private String section;
 
-@OneToOne
-    @JoinColumn(name = "student_id",nullable = false)
-    private Student student;
-
-@OneToMany(mappedBy = "student",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-@JsonBackReference
-    private List<Teacher> teachers;
+//@OneToOne
+//    @JoinColumn(name = "student_id",nullable = false)
+//    private Student student;
+//
+//@OneToMany(mappedBy = "student",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//@JsonBackReference
+//    private List<Teacher> teachers;
 
     public Student() {
     }
 
-    public Student(Integer id, String firstName, String lastName, String dob, String gender, String email, String phone, String address, String clas, String section, Student student, List<Teacher> teachers) {
+    public Student(Integer id, String firstName, String lastName, String dob, String gender, String email, String phone, String address, String clas, String section) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,8 +43,6 @@ private String section;
         this.address = address;
         this.clas = clas;
         this.section = section;
-        this.student = student;
-        this.teachers = teachers;
     }
 
     public Integer getId() {
@@ -126,21 +123,5 @@ private String section;
 
     public void setSection(String section) {
         this.section = section;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public List<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
     }
 }

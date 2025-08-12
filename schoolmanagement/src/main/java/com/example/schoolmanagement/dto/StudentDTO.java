@@ -1,4 +1,4 @@
-package dto;
+package com.example.schoolmanagement.dto;
 
 public class StudentDTO {
     private Integer id;          // Optional - for update cases

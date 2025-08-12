@@ -1,9 +1,9 @@
-package service;
+package com.example.schoolmanagement.service;
 
-import entity.Student;
+import com.example.schoolmanagement.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.StudentRepo;
+import com.example.schoolmanagement.repository.StudentRepo;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +25,7 @@ public class StudentService {
     public Student save(Student student){
         return studentRepo.save(student);
     }
+
     public void deleteById(Integer id){
         studentRepo.deleteById(id);
     }
