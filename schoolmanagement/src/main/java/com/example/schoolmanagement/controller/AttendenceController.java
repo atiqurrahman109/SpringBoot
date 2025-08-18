@@ -15,12 +15,12 @@ public class AttendenceController {
    @Autowired
    private AttendenceService attendenceService;
 
-    @PostMapping
+    @PostMapping("")
     public Attendence add(@RequestBody Attendence attendence) {
         return attendenceService.save(attendence);
     }
 
-    @GetMapping
+    @GetMapping("")
     public List<Attendence> getAll() {
         return attendenceService.getAll();
     }

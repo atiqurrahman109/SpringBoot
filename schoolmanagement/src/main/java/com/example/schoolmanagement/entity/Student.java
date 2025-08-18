@@ -11,6 +11,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;          // Optional - for update cases
+
     private String firstName;
     private String lastName;
     private String dob;           // ISO date string, e.g. '2005-08-20'

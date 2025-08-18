@@ -21,10 +21,14 @@ public class StudentRestController {
 @Autowired
    private StudentService studentService;
     //create
-    @PostMapping("")
-    public Student add(@RequestBody Student student) {
-        return studentService.save(student);
-    }
+//    @PostMapping("")
+//    public Student add(@RequestBody Student student) {
+//        return studentService.save(student);
+//    }
+        @PostMapping("")
+        public Student add(@RequestBody Student student) {
+            return studentService.save(student);
+        }
     //read all
     @GetMapping("")
     public List<Student> findAll(){
