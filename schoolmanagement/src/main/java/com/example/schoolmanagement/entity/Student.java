@@ -21,13 +21,7 @@ public class Student {
     private String clas;
     private String section;
 
-//@OneToOne
-//    @JoinColumn(name = "student_id",nullable = false)
-//    private Student student;
-//
-//@OneToMany(mappedBy = "student",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-//@JsonBackReference
-//    private List<Teacher> teachers;
+
 
     public Student() {
     }
