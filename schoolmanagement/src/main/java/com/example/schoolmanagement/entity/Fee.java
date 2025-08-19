@@ -15,15 +15,10 @@ public class Fee {
 
 
 
-    @Column(nullable = false)
+
     private String feeCategory;
-
-    @Column(nullable = false)
     private String feeMonth;
-
-    @Column(nullable = false)
     private Double feeAmount;
-
     private LocalDate paymentDate;
 
     @OneToOne(fetch = FetchType.LAZY)
