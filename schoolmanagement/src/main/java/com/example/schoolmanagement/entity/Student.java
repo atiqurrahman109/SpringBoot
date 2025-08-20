@@ -2,6 +2,7 @@ package com.example.schoolmanagement.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 
 
 @Entity
@@ -23,11 +24,13 @@ public class Student {
     private String section;
 
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Marks> marks;
 
     public Student() {
     }
 
-    public Student(Integer id, String firstName, String lastName, String dob, String gender, String email, String phone, String address, String clas, String section) {
+    public Student(Integer id, String firstName, String lastName, String dob, String gender, String email, String phone, String address, String clas, String section, List<Marks> marks) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,6 +41,7 @@ public class Student {
         this.address = address;
         this.clas = clas;
         this.section = section;
+        this.marks = marks;
     }
 
     public Integer getId() {
@@ -118,5 +122,13 @@ public class Student {
 
     public void setSection(String section) {
         this.section = section;
+    }
+
+    public List<Marks> getMarks() {
+        return marks;
+    }
+
+    public void setMarks(List<Marks> marks) {
+        this.marks = marks;
     }
 }
