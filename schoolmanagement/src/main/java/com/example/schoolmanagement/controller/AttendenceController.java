@@ -1,6 +1,7 @@
 package com.example.schoolmanagement.controller;
 
 import com.example.schoolmanagement.entity.Attendence;
+import com.example.schoolmanagement.entity.Fee;
 import com.example.schoolmanagement.service.AttendenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,15 @@ public class AttendenceController {
    @Autowired
    private AttendenceService attendenceService;
 
+//    @PostMapping("")
+//    public Attendence add(@RequestBody Attendence attendence) {
+//        return attendenceService.saveAttendence(attendence);
+//    }
+
     @PostMapping("")
-    public Attendence add(@RequestBody Attendence attendence) {
-        return attendenceService.save(attendence);
+    public Attendence saveAttendence(@RequestBody Attendence b,
+                       @RequestParam Integer studentId) {
+        return attendenceService.saveAttendence(b, studentId);
     }
 
     @GetMapping("")

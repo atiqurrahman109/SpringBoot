@@ -1,16 +1,14 @@
 package com.example.schoolmanagement.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "attendences")
 public class Attendence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer studentId;
+    private Integer id;
 
     private String studentName;
     private String className;
@@ -18,24 +16,29 @@ public class Attendence {
     private String attendanceDate;
     private String status;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "studentId")
+    private Student student;
+
     public Attendence() {
     }
 
-    public Attendence(Integer studentId, String studentName, String className, String section, String attendanceDate, String status) {
-        this.studentId = studentId;
+    public Attendence(Integer id, String studentName, String className, String section, String attendanceDate, String status, Student student) {
+        this.id = id;
         this.studentName = studentName;
         this.className = className;
         this.section = section;
         this.attendanceDate = attendanceDate;
         this.status = status;
+        this.student = student;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getStudentName() {
@@ -76,5 +79,13 @@ public class Attendence {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
