@@ -24,8 +24,6 @@ public class Marks {
     private String status;
 
 
-
-
     public Marks() {
     }
 
