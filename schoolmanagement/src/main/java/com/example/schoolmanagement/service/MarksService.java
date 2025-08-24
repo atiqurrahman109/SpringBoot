@@ -1,6 +1,8 @@
 package com.example.schoolmanagement.service;
 
+import com.example.schoolmanagement.dto.ExamDTO;
 import com.example.schoolmanagement.dto.MarksDTO;
+import com.example.schoolmanagement.dto.StudentDTO;
 import com.example.schoolmanagement.entity.Exam;
 import com.example.schoolmanagement.entity.Marks;
 import com.example.schoolmanagement.entity.Student;
@@ -72,21 +74,25 @@ public class MarksService {
 
             Student student = mark.getStudent();
             if (student != null) {
-                OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
-                orderResponseDTO.setId(or.getId());
+                StudentDTO studentDTO = new StudentDTO();
+                studentDTO.setId(student.getId());
+                studentDTO.setFirstName(student.getFirstName());
+
+                dto.setStudentDTO(studentDTO);
 
 
-                dto.setOrder(orderResponseDTO);
 
 
             }
 
-            BomStyle bomStyle = order.getBomStyle();
-            if (bomStyle != null) {
-                BomStyleResponseDTO bomStyleResponseDTO = new BomStyleResponseDTO();
-                bomStyleResponseDTO.setId(bomStyle.getId());
-                bomStyleResponseDTO.setStyleCode(bomStyle.getStyleCode());
-                dto.setBomStyle(bomStyleResponseDTO);
+            Exam exam = mark.getExam();
+            if (exam != null) {
+                ExamDTO examDTO = new ExamDTO();
+                examDTO.setId(exam.getId());
+                examDTO.setExamName(exam.getExamName());
+
+                dto.setExamDTO(examDTO);
+
             }
 
 

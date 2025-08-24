@@ -15,24 +15,24 @@ public class MarksController {
     @Autowired
     private MarksService marksService;
 
-    @PostMapping("/save")
-    public Marks saveMarks(@RequestBody MarksDTO marksDTO) {
-        return marksService.saveMarks(marksDTO);
+   //✅ Save or Update Marks
+    @PostMapping("")
+    public Marks saveOrUpdate(@RequestBody Marks marks) {
+        return marksService.saveOrUpdate(marks);
     }
-    @GetMapping("/all")
-    public List<MarksDTO> getAllMarks() {
-        return marksService.getAllMarks();
-    }
-    @GetMapping("/{id}")
-        public MarksDTO getMarks(@PathVariable int id){
-            return marksService.getMarksById(id);
-        }
-    @DeleteMapping("/delete/{id}")
-        public String deleteMarks(@PathVariable int id){
-            marksService.deleteMarks(id);
-            return "marks delete successfully";
 
-        }
+    // ✅ Delete Marks by ID
+    @DeleteMapping("/{id}")
+    public String deleteMarks(@PathVariable Integer id) {
+        marksService.deleteById(id);
+        return "Marks with ID " + id + " deleted successfully.";
+    }
+
+    // ✅ Get All Marks as DTO
+    @GetMapping("")
+    public List<MarksDTO> getAllMarks() {
+        return marksService.getAllMarksDTOS();
+    }
 
 
 }
