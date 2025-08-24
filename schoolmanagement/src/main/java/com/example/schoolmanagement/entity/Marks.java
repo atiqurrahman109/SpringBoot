@@ -11,7 +11,7 @@ public class Marks {
 
 
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)`
+    @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
 

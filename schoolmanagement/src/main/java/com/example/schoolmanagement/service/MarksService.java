@@ -63,12 +63,12 @@ public class MarksService {
         return marksRepo.findAll().stream().map(mark -> {
             MarksDTO dto = new MarksDTO();
             dto.setId(mark.getId());
-            dto.setMarksObtained(mark.getMarksObtained());
+            dto.setMarksObtainedBangla(mark.getMarksObtainedBangla());
+            dto.setMarksObtainedEnglish(mark.getMarksObtainedEnglish());
+            dto.setMarksObtainedMath(mark.getMarksObtainedMath());
             dto.setTotalMarks(mark.getTotalMarks());
-
             dto.setGrade(mark.getGrade());
             dto.setStatus(mark.getStatus());
-
 
             Student student = mark.getStudent();
             if (student != null) {

@@ -5,9 +5,11 @@ import java.time.LocalDate;
 public class MarksDTO {
     private int id;
 
-    private double marksObtained;
-    private double totalMarks;
-    private  String grade;
+    private float marksObtainedBangla;
+    private float marksObtainedEnglish;
+    private float marksObtainedMath;
+    private Double totalMarks;
+    private String grade;
     private String status;
 
     private ExamDTO examDTO;
@@ -16,9 +18,11 @@ public class MarksDTO {
     public MarksDTO() {
     }
 
-    public MarksDTO(int id, double marksObtained, double totalMarks, String grade, String status, ExamDTO examDTO, StudentDTO studentDTO) {
+    public MarksDTO(int id, float marksObtainedBangla, float marksObtainedEnglish, float marksObtainedMath, Double totalMarks, String grade, String status, ExamDTO examDTO, StudentDTO studentDTO) {
         this.id = id;
-        this.marksObtained = marksObtained;
+        this.marksObtainedBangla = marksObtainedBangla;
+        this.marksObtainedEnglish = marksObtainedEnglish;
+        this.marksObtainedMath = marksObtainedMath;
         this.totalMarks = totalMarks;
         this.grade = grade;
         this.status = status;
@@ -34,19 +38,35 @@ public class MarksDTO {
         this.id = id;
     }
 
-    public double getMarksObtained() {
-        return marksObtained;
+    public float getMarksObtainedBangla() {
+        return marksObtainedBangla;
     }
 
-    public void setMarksObtained(double marksObtained) {
-        this.marksObtained = marksObtained;
+    public void setMarksObtainedBangla(float marksObtainedBangla) {
+        this.marksObtainedBangla = marksObtainedBangla;
     }
 
-    public double getTotalMarks() {
+    public float getMarksObtainedEnglish() {
+        return marksObtainedEnglish;
+    }
+
+    public void setMarksObtainedEnglish(float marksObtainedEnglish) {
+        this.marksObtainedEnglish = marksObtainedEnglish;
+    }
+
+    public float getMarksObtainedMath() {
+        return marksObtainedMath;
+    }
+
+    public void setMarksObtainedMath(float marksObtainedMath) {
+        this.marksObtainedMath = marksObtainedMath;
+    }
+
+    public Double getTotalMarks() {
         return totalMarks;
     }
 
-    public void setTotalMarks(double totalMarks) {
+    public void setTotalMarks(Double totalMarks) {
         this.totalMarks = totalMarks;
     }
 
