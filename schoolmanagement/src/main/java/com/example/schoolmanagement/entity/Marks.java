@@ -3,6 +3,7 @@ package com.example.schoolmanagement.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "marks")
 public class Marks {
     @Id
     @GeneratedValue
@@ -10,7 +11,7 @@ public class Marks {
 
 
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
+    @JoinColumn(name = "student_id", nullable = false)`
     private Student student;
 
 
@@ -18,7 +19,9 @@ public class Marks {
     @JoinColumn(name = "exam_id", nullable = false)
     private Exam exam;
 
-    private Double marksObtained;
+    private float marksObtainedBangla;
+    private float marksObtainedEnglish;
+    private float marksObtainedMath;
     private Double totalMarks;
     private String grade;
     private String status;
@@ -27,11 +30,13 @@ public class Marks {
     public Marks() {
     }
 
-    public Marks(int id, Student student, Exam exam, Double marksObtained, Double totalMarks, String grade, String status) {
+    public Marks(int id, Student student, Exam exam, float marksObtainedBangla, float marksObtainedEnglish, float marksObtainedMath, Double totalMarks, String grade, String status) {
         this.id = id;
         this.student = student;
         this.exam = exam;
-        this.marksObtained = marksObtained;
+        this.marksObtainedBangla = marksObtainedBangla;
+        this.marksObtainedEnglish = marksObtainedEnglish;
+        this.marksObtainedMath = marksObtainedMath;
         this.totalMarks = totalMarks;
         this.grade = grade;
         this.status = status;
@@ -61,12 +66,28 @@ public class Marks {
         this.exam = exam;
     }
 
-    public Double getMarksObtained() {
-        return marksObtained;
+    public float getMarksObtainedBangla() {
+        return marksObtainedBangla;
     }
 
-    public void setMarksObtained(Double marksObtained) {
-        this.marksObtained = marksObtained;
+    public void setMarksObtainedBangla(float marksObtainedBangla) {
+        this.marksObtainedBangla = marksObtainedBangla;
+    }
+
+    public float getMarksObtainedEnglish() {
+        return marksObtainedEnglish;
+    }
+
+    public void setMarksObtainedEnglish(float marksObtainedEnglish) {
+        this.marksObtainedEnglish = marksObtainedEnglish;
+    }
+
+    public float getMarksObtainedMath() {
+        return marksObtainedMath;
+    }
+
+    public void setMarksObtainedMath(float marksObtainedMath) {
+        this.marksObtainedMath = marksObtainedMath;
     }
 
     public Double getTotalMarks() {

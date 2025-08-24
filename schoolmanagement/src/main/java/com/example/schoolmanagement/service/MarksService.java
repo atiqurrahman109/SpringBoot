@@ -59,50 +59,38 @@ public class MarksService {
 
 
     // ✅ Get BOMs by Style Code and return as DTOs
-    public List<BomResponseDTO> getBOMsByStyleCode(String styleCode) {
-        List<BOM> boms = bomRepo.findAllByStyleCode(styleCode);
+    public List<MarksDTO> getAllMarksDTOS() {
+        return marksRepo.findAll().stream().map(mark -> {
+            MarksDTO dto = new MarksDTO();
+            dto.setId(mark.getId());
+            dto.setMarksObtained(mark.getMarksObtained());
+            dto.setTotalMarks(mark.getTotalMarks());
 
-        return boms.stream().map(bom -> {
-            // Map UOM
-            UOM uom = bom.getUom();
-            UomResponseDTO uomDto = null;
-            if (uom != null) {
-                uomDto = new UomResponseDTO();
-                uomDto.setId(uom.getId());
-                uomDto.setProductName(uom.getProductName());
-                uomDto.setSize(uom.getSize());
-                uomDto.setBody(uom.getBody());
-                uomDto.setSleeve(uom.getSleeve());
-                uomDto.setPocket(uom.getPocket());
-                uomDto.setWastage(uom.getWastage());
-                uomDto.setShrinkage(uom.getShrinkage());
-                uomDto.setBaseFabric(uom.getBaseFabric());
+            dto.setGrade(mark.getGrade());
+            dto.setStatus(mark.getStatus());
+
+
+            Student student = mark.getStudent();
+            if (student != null) {
+                OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
+                orderResponseDTO.setId(or.getId());
+
+
+                dto.setOrder(orderResponseDTO);
+
+
             }
 
-            // Map BomStyle
-            BomStyle style = bom.getBomStyle();
-            BomStyleResponseDTO styleDto = null;
-            if (style != null) {
-                styleDto = new BomStyleResponseDTO();
-                styleDto.setId(style.getId());
-                styleDto.setStyleCode(style.getStyleCode());
-                styleDto.setStyleType(style.getStyleType());
-                styleDto.setDescription(style.getDescription());
+            BomStyle bomStyle = order.getBomStyle();
+            if (bomStyle != null) {
+                BomStyleResponseDTO bomStyleResponseDTO = new BomStyleResponseDTO();
+                bomStyleResponseDTO.setId(bomStyle.getId());
+                bomStyleResponseDTO.setStyleCode(bomStyle.getStyleCode());
+                dto.setBomStyle(bomStyleResponseDTO);
             }
 
-            // Map BOM
-            BomResponseDTO bomDto = new BomResponseDTO();
-            bomDto.setId(bom.getId());
-            bomDto.setSerial(bom.getSerial());
-            bomDto.setMaterial(bom.getMaterial());
-            bomDto.setUnit(bom.getUnit());
-            bomDto.setQuantity(bom.getQuantity());
-            bomDto.setUnitPrice(bom.getUnitPrice());
-            bomDto.setTotalCost(bom.getTotalCost());
-            bomDto.setUom(uomDto);
-            bomDto.setBomStyle(styleDto);
 
-            return bomDto;
-        }).collect(Collectors.toList());
+            return dto;
+        }).toList();
     }
 }
