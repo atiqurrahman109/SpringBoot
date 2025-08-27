@@ -2,18 +2,18 @@ package com.example.schoolmanagement.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "attendences")
 public class Attendence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
-    private String studentName;
-    private String className;
-    private String section;
-    private String attendanceDate;
+
+    private Date attendanceDate;
     private String status;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -23,11 +23,8 @@ public class Attendence {
     public Attendence() {
     }
 
-    public Attendence(Integer id, String studentName, String className, String section, String attendanceDate, String status, Student student) {
+    public Attendence(Integer id, Date attendanceDate, String status, Student student) {
         this.id = id;
-        this.studentName = studentName;
-        this.className = className;
-        this.section = section;
         this.attendanceDate = attendanceDate;
         this.status = status;
         this.student = student;
@@ -41,35 +38,11 @@ public class Attendence {
         this.id = id;
     }
 
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getSection() {
-        return section;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
-    }
-
-    public String getAttendanceDate() {
+    public Date getAttendanceDate() {
         return attendanceDate;
     }
 
-    public void setAttendanceDate(String attendanceDate) {
+    public void setAttendanceDate(Date attendanceDate) {
         this.attendanceDate = attendanceDate;
     }
 

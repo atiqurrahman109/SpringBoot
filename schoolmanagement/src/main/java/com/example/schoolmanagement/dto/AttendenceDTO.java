@@ -1,63 +1,30 @@
 package com.example.schoolmanagement.dto;
 
+import java.util.Date;
+
 public class AttendenceDTO {
-    private Integer studentId;
-    private String studentName;
-    private String  className;
-    private String  section;
-    private String  attendanceDate;
+    private int id;
     private String  status;
+    private Date attendanceDate;
+
+    private StudentDTO student;
 
     public AttendenceDTO() {
     }
 
-    public AttendenceDTO(Integer studentId, String studentName, String className, String section, String attendanceDate, String status) {
-        this.studentId = studentId;
-        this.studentName = studentName;
-        this.className = className;
-        this.section = section;
-        this.attendanceDate = attendanceDate;
+    public AttendenceDTO(int id, String status, Date attendanceDate, StudentDTO student) {
+        this.id = id;
         this.status = status;
-    }
-
-    public Integer getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getSection() {
-        return section;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
-    }
-
-    public String getAttendanceDate() {
-        return attendanceDate;
-    }
-
-    public void setAttendanceDate(String attendanceDate) {
         this.attendanceDate = attendanceDate;
+        this.student = student;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStatus() {
@@ -66,5 +33,21 @@ public class AttendenceDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getAttendanceDate() {
+        return attendanceDate;
+    }
+
+    public void setAttendanceDate(Date attendanceDate) {
+        this.attendanceDate = attendanceDate;
+    }
+
+    public StudentDTO getStudent() {
+        return student;
+    }
+
+    public void setStudent(StudentDTO student) {
+        this.student = student;
     }
 }

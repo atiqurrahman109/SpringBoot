@@ -25,9 +25,10 @@ public class Student {
     private String section;
 
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Marks> marks;
+
+
 
 
     public Student() {

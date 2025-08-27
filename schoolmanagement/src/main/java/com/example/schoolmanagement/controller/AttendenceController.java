@@ -1,9 +1,12 @@
 package com.example.schoolmanagement.controller;
 
+import com.example.schoolmanagement.dto.AttendenceDTO;
 import com.example.schoolmanagement.entity.Attendence;
 import com.example.schoolmanagement.entity.Fee;
 import com.example.schoolmanagement.service.AttendenceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,20 +19,24 @@ public class AttendenceController {
    @Autowired
    private AttendenceService attendenceService;
 
-//    @PostMapping("")
-//    public Attendence add(@RequestBody Attendence attendence) {
-//        return attendenceService.saveAttendence(attendence);
-//    }
-
     @PostMapping("")
-    public Attendence saveAttendence(@RequestBody Attendence b,
-                       @RequestParam Integer studentId) {
-        return attendenceService.saveAttendence(b, studentId);
+    public ResponseEntity<Attendence> createAttendence(
+            @RequestBody Attendence attendence
+
+    ) {
+
+        Attendence saved = attendenceService.saveOrUpdate(attendence);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+    }
+
+    @GetMapping("all")
+    public List<Attendence> getAll() {
+        return attendenceService.getAll();
     }
 
     @GetMapping("")
-    public List<Attendence> getAll() {
-        return attendenceService.getAll();
+    public List<AttendenceDTO> getAllAttendenceDTO() {
+        return attendenceService.getAlAttendenceDTOS();
     }
 
     @GetMapping("/{id}")
