@@ -1,5 +1,6 @@
 package com.example.schoolmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,12 +13,8 @@ public class Marks {
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
+    @JsonBackReference
     private Student student;
-
-
-    @ManyToOne
-    @JoinColumn(name = "exam_id", nullable = false)
-    private Exam exam;
 
     private float marksObtainedBangla;
     private float marksObtainedEnglish;
@@ -30,10 +27,9 @@ public class Marks {
     public Marks() {
     }
 
-    public Marks(int id, Student student, Exam exam, float marksObtainedBangla, float marksObtainedEnglish, float marksObtainedMath, Double totalMarks, String grade, String status) {
+    public Marks(int id, Student student, float marksObtainedBangla, float marksObtainedEnglish, float marksObtainedMath, Double totalMarks, String grade, String status) {
         this.id = id;
         this.student = student;
-        this.exam = exam;
         this.marksObtainedBangla = marksObtainedBangla;
         this.marksObtainedEnglish = marksObtainedEnglish;
         this.marksObtainedMath = marksObtainedMath;
@@ -56,14 +52,6 @@ public class Marks {
 
     public void setStudent(Student student) {
         this.student = student;
-    }
-
-    public Exam getExam() {
-        return exam;
-    }
-
-    public void setExam(Exam exam) {
-        this.exam = exam;
     }
 
     public float getMarksObtainedBangla() {

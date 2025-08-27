@@ -1,23 +1,15 @@
 package com.example.schoolmanagement.service;
 
-import com.example.schoolmanagement.dto.ExamDTO;
 import com.example.schoolmanagement.dto.MarksDTO;
 import com.example.schoolmanagement.dto.StudentDTO;
-import com.example.schoolmanagement.entity.Exam;
 import com.example.schoolmanagement.entity.Marks;
 import com.example.schoolmanagement.entity.Student;
-import com.example.schoolmanagement.repository.ExamRepo;
-
 import com.example.schoolmanagement.repository.MarksRepo;
-
 import com.example.schoolmanagement.repository.StudentRepo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class MarksService {
@@ -27,40 +19,40 @@ public class MarksService {
 
     @Autowired
     private StudentRepo studentRepo;
-    @Autowired
-    private ExamRepo examrepo;
 
-
-
-    // Save or Update
-
+    // ✅ Save or Update Marks
     public Marks saveOrUpdate(Marks marks) {
+        // Ensure student exists
         Student student = studentRepo.findById(marks.getStudent().getId())
-                .orElseThrow(() -> new RuntimeException("Marks not found with id: " + marks.getStudent().getId()));
-
-        Exam exam = examrepo.findById(marks.getExam().getId())
-                .orElseThrow(() -> new RuntimeException("Exam not found with id: " + marks.getExam().getId()));
+                .orElseThrow(() -> new RuntimeException("Student not found with ID: " + marks.getStudent().getId()));
 
         marks.setStudent(student);
-        marks.setExam(exam);
+
+        // Auto-calculate total marks
+        double total = marks.getMarksObtainedBangla()
+                + marks.getMarksObtainedEnglish()
+                + marks.getMarksObtainedMath();
+        marks.setTotalMarks(total);
+
+        // Auto-grade
+        if (total >= 240) marks.setGrade("A+");
+        else if (total >= 210) marks.setGrade("A");
+        else if (total >= 180) marks.setGrade("B");
+        else if (total >= 150) marks.setGrade("C");
+        else if (total >= 120) marks.setGrade("D");
+        else marks.setGrade("F");
+
+        marks.setStatus(total >= 150 ? "Pass" : "Fail");
 
         return marksRepo.save(marks);
     }
 
-
+    // ✅ Delete by ID
     public void deleteById(Integer id) {
         marksRepo.deleteById(id);
     }
-   
 
-
-//    // ✅ New Service Method: Get BOMs by Style Code
-//    public List<BOM> getBOMsByStyleCode(String styleCode) {
-//        return bomRepo.findAllByStyleCode(styleCode);
-//    }
-
-
-    // ✅ Get BOMs by Style Code and return as DTOs
+    // ✅ Get all Marks as DTOs
     public List<MarksDTO> getAllMarksDTOS() {
         return marksRepo.findAll().stream().map(mark -> {
             MarksDTO dto = new MarksDTO();
@@ -77,27 +69,10 @@ public class MarksService {
                 StudentDTO studentDTO = new StudentDTO();
                 studentDTO.setId(student.getId());
                 studentDTO.setFirstName(student.getFirstName());
-
                 dto.setStudentDTO(studentDTO);
-
-
-
-
             }
-
-            Exam exam = mark.getExam();
-            if (exam != null) {
-                ExamDTO examDTO = new ExamDTO();
-                examDTO.setId(exam.getId());
-                examDTO.setExamName(exam.getExamName());
-
-                dto.setExamDTO(examDTO);
-
-            }
-
 
             return dto;
         }).toList();
     }
 }
-jhggfdsasff
