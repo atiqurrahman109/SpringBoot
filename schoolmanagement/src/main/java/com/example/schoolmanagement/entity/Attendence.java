@@ -16,7 +16,7 @@ public class Attendence {
     private Date attendanceDate;
     private String status;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "studentId")
     private Student student;
 

@@ -84,7 +84,10 @@ public class AttendenceService {
             Student student = atten.getStudent();
             if (student != null) {
                 StudentDTO studentDTO = new StudentDTO();
-                studentDTO.setId(atten.getId());
+                studentDTO.setId(student.getId());
+                studentDTO.setFirstName(student.getFirstName());
+                studentDTO.setClas(student.getClas());
+                studentDTO.setSection(student.getSection());
 
 
                 dto.setStudent(studentDTO);

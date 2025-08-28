@@ -12,7 +12,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;          // Optional - for update cases
+    private int id;          // Optional - for update cases
 
     private String firstName;
     private String lastName;
@@ -27,6 +27,8 @@ public class Student {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Marks> marks;
+    @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL)
+    private List<Attendence> attendences;
 
 
 
@@ -136,4 +138,4 @@ public class Student {
         this.marks = marks;
     }
 }
-jkjhgfdsa
+
