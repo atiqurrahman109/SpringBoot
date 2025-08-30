@@ -5,13 +5,15 @@ import com.example.schoolmanagement.entity.Fee;
 import com.example.schoolmanagement.service.FeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/fees")
-@CrossOrigin(origins = "*") // allow frontend access
+@CrossOrigin("*") // allow frontend access
 public class FeeController {
 
     @Autowired
@@ -22,16 +24,20 @@ public class FeeController {
 //    }
 
     @PostMapping("")
-    public Fee saveFee(@RequestBody Fee b,
-                        @RequestParam Integer student_id) {
-        return feeService.saveFee(b, student_id);
+    public ResponseEntity<Fee> createFee(
+            @RequestBody Fee fee
+
+    ) {
+
+        Fee saved = feeService.saveOrUpdate(fee);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-//    @GetMapping
-//    public List<FeeDTO> getAllFees() {
-//        return feeService.getAllFees();
-//    }
-//
+    @GetMapping("")
+    public List<FeeDTO> getAllFees() {
+        return feeService.getAllFeeDTOS();
+    }
+
 //    @GetMapping("/{id}")
 //    public FeeDTO getFee(@PathVariable Long id) {
 //        return feeService.getFeeById(id);

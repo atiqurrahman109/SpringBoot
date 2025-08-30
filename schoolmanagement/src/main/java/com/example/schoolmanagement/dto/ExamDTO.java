@@ -3,15 +3,17 @@ package com.example.schoolmanagement.dto;
 public class ExamDTO {
     private int id;
     private String examName;
-    private String examType;
+    private String examMonth;
+
+
 
     public ExamDTO() {
     }
 
-    public ExamDTO(int id, String examName, String examType) {
+    public ExamDTO(int id, String examName, String examMonth) {
         this.id = id;
         this.examName = examName;
-        this.examType = examType;
+        this.examMonth = examMonth;
     }
 
     public int getId() {
@@ -30,11 +32,11 @@ public class ExamDTO {
         this.examName = examName;
     }
 
-    public String getExamType() {
-        return examType;
+    public String getExamMonth() {
+        return examMonth;
     }
 
-    public void setExamType(String examType) {
-        this.examType = examType;
+    public void setExamMonth(String examMonth) {
+        this.examMonth = examMonth;
     }
 }

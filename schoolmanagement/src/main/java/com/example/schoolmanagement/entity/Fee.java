@@ -13,15 +13,12 @@ public class Fee {
 
     // link to Student
 
-
-
-
     private String feeCategory;
     private String feeMonth;
     private Double feeAmount;
     private LocalDate paymentDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;// optional
 

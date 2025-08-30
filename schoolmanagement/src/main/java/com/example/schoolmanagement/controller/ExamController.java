@@ -18,8 +18,8 @@ public class ExamController {
     private ExamService examService;
 
     @PostMapping("/save")
-    public Exam saveExam(@RequestBody ExamDTO examDTO) {
-        return examService.saveExam(examDTO);
+    public Exam saveExam(@RequestBody Exam exam) {
+        return examService.saveOrUpdate(exam);
     }
 
     @GetMapping("/all")

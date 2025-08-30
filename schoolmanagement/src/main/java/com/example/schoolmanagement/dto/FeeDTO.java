@@ -10,6 +10,8 @@ public class FeeDTO {
     private Double feeAmount;
     private LocalDate paymentDate;
 
+    private StudentDTO student;
+
 
 
 
@@ -19,12 +21,13 @@ public class FeeDTO {
     public FeeDTO() {
     }
 
-    public FeeDTO(Integer id, String feeCategory, String feeMonth, Double feeAmount, LocalDate paymentDate) {
+    public FeeDTO(Integer id, String feeCategory, String feeMonth, Double feeAmount, LocalDate paymentDate, StudentDTO student) {
         this.id = id;
         this.feeCategory = feeCategory;
         this.feeMonth = feeMonth;
         this.feeAmount = feeAmount;
         this.paymentDate = paymentDate;
+        this.student = student;
     }
 
     public Integer getId() {
@@ -65,5 +68,13 @@ public class FeeDTO {
 
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public StudentDTO getStudent() {
+        return student;
+    }
+
+    public void setStudent(StudentDTO student) {
+        this.student = student;
     }
 }

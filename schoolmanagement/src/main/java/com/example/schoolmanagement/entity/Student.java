@@ -29,6 +29,10 @@ public class Student {
     private List<Marks> marks;
     @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL)
     private List<Attendence> attendences;
+    @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL)
+    private List<Fee> fees;
+
+
 
 
 

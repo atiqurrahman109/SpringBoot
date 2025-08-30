@@ -1,10 +1,12 @@
 package com.example.schoolmanagement.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.yaml.snakeyaml.error.Mark;
+
+import java.util.List;
+
 @Entity
+@Table(name = "exam")
 public class Exam {
 
     @Id
@@ -12,15 +14,18 @@ public class Exam {
     private int id;
 
     private String examName;
-    private String examType;
+    private String examMonth;
+
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
+    private List<Marks> marks;
 
     public Exam() {
     }
 
-    public Exam(int id, String examName, String examType) {
+    public Exam(int id, String examName, String examMonth) {
         this.id = id;
         this.examName = examName;
-        this.examType = examType;
+        this.examMonth = examMonth;
     }
 
     public int getId() {
@@ -39,11 +44,11 @@ public class Exam {
         this.examName = examName;
     }
 
-    public String getExamType() {
-        return examType;
+    public String getExamMonth() {
+        return examMonth;
     }
 
-    public void setExamType(String examType) {
-        this.examType = examType;
+    public void setExamMonth(String examMonth) {
+        this.examMonth = examMonth;
     }
 }

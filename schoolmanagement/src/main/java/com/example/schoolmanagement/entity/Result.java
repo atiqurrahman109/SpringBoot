@@ -15,6 +15,7 @@ public class Result {
     private String grade;
     private String examType;
 
+
     @OneToOne
     private Student student;
 

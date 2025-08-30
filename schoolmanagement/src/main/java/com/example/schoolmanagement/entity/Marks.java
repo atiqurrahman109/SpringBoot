@@ -7,14 +7,8 @@ import jakarta.persistence.*;
 @Table(name = "marks")
 public class Marks {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-
-    @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    @JsonBackReference
-    private Student student;
 
     private float marksObtainedBangla;
     private float marksObtainedEnglish;
@@ -23,19 +17,29 @@ public class Marks {
     private String grade;
     private String status;
 
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "exam_id", nullable = false)
+    private Exam exam;
+
+
 
     public Marks() {
     }
 
-    public Marks(int id, Student student, float marksObtainedBangla, float marksObtainedEnglish, float marksObtainedMath, Double totalMarks, String grade, String status) {
+    public Marks(int id, float marksObtainedBangla, float marksObtainedEnglish, float marksObtainedMath, Double totalMarks, String grade, String status, Student student, Exam exam) {
         this.id = id;
-        this.student = student;
         this.marksObtainedBangla = marksObtainedBangla;
         this.marksObtainedEnglish = marksObtainedEnglish;
         this.marksObtainedMath = marksObtainedMath;
         this.totalMarks = totalMarks;
         this.grade = grade;
         this.status = status;
+        this.student = student;
+        this.exam = exam;
     }
 
     public int getId() {
@@ -100,5 +104,13 @@ public class Marks {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
     }
 }

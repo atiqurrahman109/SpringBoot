@@ -16,11 +16,7 @@ public class ExamService {
     private ExamRepo examRepo;
 
     //save or update
-    public Exam saveExam (ExamDTO examDTO) {
-        Exam exam = new Exam();
-        exam.setId(examDTO.getId());
-        exam.setExamName(examDTO.getExamName());
-        exam.setExamType(examDTO.getExamType());
+    public Exam saveOrUpdate(Exam exam) {
         return examRepo.save(exam);
     }
 
@@ -41,7 +37,7 @@ public class ExamService {
     }
     // Convert entity to DTO
     private ExamDTO convertToDTO(Exam exam) {
-        return new ExamDTO(exam.getId(), exam.getExamName(), exam.getExamType());
+        return new ExamDTO(exam.getId(), exam.getExamName(), exam.getExamMonth());
     }
 
     }
