@@ -8,6 +8,11 @@ public class MarksDTO {
     private float marksObtainedBangla;
     private float marksObtainedEnglish;
     private float marksObtainedMath;
+    private float marksObtainedIslam;
+    private float marksObtainedScience;
+    private float marksObtainedSports;
+
+    private Double gpa;
     private Double totalMarks;
     private String grade;
     private String status;
@@ -18,11 +23,15 @@ public class MarksDTO {
     public MarksDTO() {
     }
 
-    public MarksDTO(int id, float marksObtainedBangla, float marksObtainedEnglish, float marksObtainedMath, Double totalMarks, String grade, String status, ExamDTO examDTO, StudentDTO studentDTO) {
+    public MarksDTO(int id, float marksObtainedBangla, float marksObtainedEnglish, float marksObtainedMath, float marksObtainedIslam, float marksObtainedScience, float marksObtainedSports, Double gpa, Double totalMarks, String grade, String status, ExamDTO examDTO, StudentDTO studentDTO) {
         this.id = id;
         this.marksObtainedBangla = marksObtainedBangla;
         this.marksObtainedEnglish = marksObtainedEnglish;
         this.marksObtainedMath = marksObtainedMath;
+        this.marksObtainedIslam = marksObtainedIslam;
+        this.marksObtainedScience = marksObtainedScience;
+        this.marksObtainedSports = marksObtainedSports;
+        this.gpa = gpa;
         this.totalMarks = totalMarks;
         this.grade = grade;
         this.status = status;
@@ -100,5 +109,37 @@ public class MarksDTO {
 
     public void setStudentDTO(StudentDTO studentDTO) {
         this.studentDTO = studentDTO;
+    }
+
+    public float getMarksObtainedIslam() {
+        return marksObtainedIslam;
+    }
+
+    public void setMarksObtainedIslam(float marksObtainedIslam) {
+        this.marksObtainedIslam = marksObtainedIslam;
+    }
+
+    public float getMarksObtainedScience() {
+        return marksObtainedScience;
+    }
+
+    public void setMarksObtainedScience(float marksObtainedScience) {
+        this.marksObtainedScience = marksObtainedScience;
+    }
+
+    public float getMarksObtainedSports() {
+        return marksObtainedSports;
+    }
+
+    public void setMarksObtainedSports(float marksObtainedSports) {
+        this.marksObtainedSports = marksObtainedSports;
+    }
+
+    public Double getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(Double gpa) {
+        this.gpa = gpa;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.schoolmanagement.service;
 
+import com.example.schoolmanagement.dto.FeeDTO;
+import com.example.schoolmanagement.dto.StudentDTO;
 import com.example.schoolmanagement.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +44,31 @@ public class StudentService {
     }
 
     public Optional<Student> findById(Integer id)
-    {return  studentRepo.findById(id);}
+    {return  studentRepo.findById(id);
+    }
+
+
+    public List<StudentDTO> getAllStuDTOS() {
+        return studentRepo.findAll().stream().map(stu -> {
+            StudentDTO dto = new StudentDTO();
+            dto.setId(stu.getId());
+            dto.setFirstName(stu.getFirstName());
+            dto.setLastName(stu.getLastName());
+            dto.setEmail(stu.getEmail());
+            dto.setPhone(stu.getPhone());
+            dto.setAddress(stu.getAddress());
+            dto.setGender(stu.getGender());
+            dto.setClas(stu.getClas());
+            dto.setSection(stu.getSection());
+            dto.setDob(stu.getDob());
+
+
+
+
+
+            return dto;
+        }).toList();
+    }
 
     }
 

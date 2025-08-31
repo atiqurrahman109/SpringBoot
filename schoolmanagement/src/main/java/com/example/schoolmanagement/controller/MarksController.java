@@ -18,35 +18,37 @@ public class MarksController {
     @Autowired
     private MarksService marksService;
 
-    // ✅ Save or Update
+    // ✅ Save or Update Marks
     @PostMapping("")
     public ResponseEntity<?> saveOrUpdate(@RequestBody Marks marks) {
         try {
-            Marks saved = marksService.saveOrUpdate(marks);
-            return ResponseEntity.ok(saved);
+            MarksDTO saved = marksService.saveOrUpdate(marks);
+            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
         } catch (RuntimeException ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unexpected error occurred");
         }
     }
 
-    // ✅ Delete
+    // ✅ Get All Marks (DTOs)
+    @GetMapping("")
+    public ResponseEntity<List<MarksDTO>> getAllMarks() {
+        List<MarksDTO> all = marksService.getAllMarksDTOS();
+        return ResponseEntity.ok(all);
+    }
+
+    // ✅ Delete Marks by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteMarks(@PathVariable Integer id) {
         try {
             marksService.deleteById(id);
             return ResponseEntity.ok("Marks with ID " + id + " deleted successfully.");
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Delete failed");
         }
-    }
-
-    // ✅ Get All DTOs
-    @GetMapping("")
-    public ResponseEntity<List<MarksDTO>> getAllMarks() {
-        List<MarksDTO> all = marksService.getAllMarksDTOS();
-        return ResponseEntity.ok(all);
     }
 }

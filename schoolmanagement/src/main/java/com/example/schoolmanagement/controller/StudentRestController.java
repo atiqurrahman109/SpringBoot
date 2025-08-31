@@ -1,6 +1,7 @@
 package com.example.schoolmanagement.controller;
 
 
+import com.example.schoolmanagement.dto.StudentDTO;
 import com.example.schoolmanagement.entity.Student;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,16 @@ public class StudentRestController {
             return studentService.save(student);
         }
     //read all
-    @GetMapping("")
+    @GetMapping("all")
     public List<Student> findAll(){
         return studentService.findAll();
     }
+    @GetMapping("")
+    public List<StudentDTO> getAllStudent() {
+            return studentService.getAllStuDTOS();
+    }
+
+
 
     //read one
     @GetMapping("/{id}")
