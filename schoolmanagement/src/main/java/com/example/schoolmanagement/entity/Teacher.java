@@ -2,6 +2,8 @@ package com.example.schoolmanagement.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="teachers")
 public class Teacher {
@@ -21,6 +23,9 @@ public class Teacher {
   private String  experience;     // in years
   private String  subject;        // e.g. "Mathematics"
  private String   joiningDate;
+
+ @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+ private List<ClassSchedule> classSchedules;
 
     public Teacher() {
     }
