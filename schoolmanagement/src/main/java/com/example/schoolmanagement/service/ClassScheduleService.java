@@ -1,6 +1,7 @@
 package com.example.schoolmanagement.service;
 
 import com.example.schoolmanagement.dto.ClassScheduleDTO;
+import com.example.schoolmanagement.dto.TeacherDTO;
 import com.example.schoolmanagement.entity.ClassSchedule;
 import com.example.schoolmanagement.entity.Teacher;
 import com.example.schoolmanagement.repository.ClassScheduleRepo;
@@ -70,40 +71,31 @@ public class ClassScheduleService {
 
 
     public List<ClassScheduleDTO> getAllClassScheduleDTOS() {
-        return dayWiseProductionRepo.findAll().stream().map(dayWise -> {
-            DayWiseProductionResponseDTO dto = new DayWiseProductionResponseDTO();
+        return classScheduleRepo.findAll().stream().map(clScheule -> {
+            ClassScheduleDTO dto = new ClassScheduleDTO();
 
-            dto.setId(dayWise.getId());
-            dto.setUpdatedDate(dayWise.getUpdatedDate());
-
-            dto.setShortSQty(dayWise.getShortSQty());
-            dto.setShortMQty(dayWise.getShortMQty());
-            dto.setShortLQty(dayWise.getShortMQty());
-            dto.setShortXLQty(dayWise.getShortXLQty());
-
-            dto.setFullSQty(dayWise.getFullSQty());
-            dto.setFullMQty(dayWise.getFullMQty());
-            dto.setFullLQty(dayWise.getFullLQty());
-            dto.setFullXLQty(dayWise.getFullXLQty());
+            dto.setId(clScheule.getId());
+            dto.setClassName(clScheule.getClassName());
+            dto.setSection(clScheule.getSection());
+            dto.setDayOfWeek(clScheule.getDayOfWeek());
+            dto.setStartTime(clScheule.getStartTime());
+            dto.setEndTime(clScheule.getEndTime());
+            dto.setSubject(clScheule.getSubject());
 
 
-            ProductionOrder order = dayWise.getProductionOrder();
-            if (order != null) {
-                ProductionOrderResponseDTO productionOrderResponseDTO = new ProductionOrderResponseDTO();
-                productionOrderResponseDTO.setId(order.getId());
 
-                dto.setProductionOrder(productionOrderResponseDTO);
+
+            Teacher teacher = clScheule.getTeacher();
+            if (teacher != null) {
+                TeacherDTO teacherDTO = new TeacherDTO();
+                teacherDTO.setId(teacherDTO.getId());
+                teacherDTO.setFirstName(teacher.getFirstName());
+
+                dto.setTeacher(teacherDTO);
 
 
             }
 
-            Order or = dayWise.getOrder();
-            if (or != null) {
-                OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
-                orderResponseDTO.setId(or.getId());
-
-                dto.setOrder(orderResponseDTO);
-            }
 
 
             return dto;
