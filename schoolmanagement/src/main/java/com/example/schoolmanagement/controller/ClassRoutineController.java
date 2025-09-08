@@ -1,8 +1,11 @@
 package com.example.schoolmanagement.controller;
 
 import com.example.schoolmanagement.dto.ClassRoutineDTO;
+import com.example.schoolmanagement.entity.ClassRoutine;
 import com.example.schoolmanagement.service.ClassRoutineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,32 +18,43 @@ public class ClassRoutineController {
     @Autowired
     private ClassRoutineService classRoutineService;
 
-    // Handle both "all" and "by className" in the same endpoint
-    @GetMapping
-    public List<ClassRoutineDTO> getRoutines(@RequestParam(required = false) String className) {
-        if (className != null && !className.isEmpty()) {
-            return classRoutineService.getRoutinesByClassName(className);
-        }
-        return classRoutineService.getAllRoutines();
+
+
+
+    @GetMapping("all")
+    public List<ClassRoutine> getAllClassRoutine() {
+        return classRoutineService.getAllClassRoutines();
+    }
+    @GetMapping("")
+    public List<ClassRoutineDTO> getAllClassRoutineDTO() {
+        return classRoutineService.getAllClassRoutineDTOS();
     }
 
-    @GetMapping("/{id}")
-    public ClassRoutineDTO getRoutineById(@PathVariable Integer id) {
-        return classRoutineService.getRoutineById(id);
+
+    @PostMapping("")
+    public ResponseEntity<ClassRoutine> createClassRoutine(
+            @RequestBody ClassRoutine classRoutine
+
+    ) {
+
+        ClassRoutine saved = classRoutineService.saveOrUpdate(classRoutine);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-    @PostMapping
-    public ClassRoutineDTO createRoutine(@RequestBody ClassRoutineDTO dto) {
-        return classRoutineService.createRoutine(dto);
+    @GetMapping("/teacher_id/{id}")
+    public List<ClassRoutineDTO> getClassRoutineByTeacherId(@PathVariable int id) {
+        return classRoutineService.getClassRoutineByTeachersId(id);
     }
 
-    @PutMapping("/{id}")
-    public ClassRoutineDTO updateRoutine(@PathVariable Integer id, @RequestBody ClassRoutineDTO dto) {
-        return classRoutineService.updateRoutine(id, dto);
+
+    @GetMapping("/teacher_id/{id}/day/{dayOfWeek}")
+    public List<ClassRoutineDTO> getClassRoutineByTeacherIdAndDay(
+            @PathVariable int id,
+            @PathVariable String dayOfWeek
+    ) {
+        return classRoutineService.getClassRoutineByTeacherIdAndDay(id, dayOfWeek);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteRoutine(@PathVariable Integer id) {
-        classRoutineService.deleteRoutine(id);
-    }
 }
+
+

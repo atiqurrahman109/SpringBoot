@@ -1,27 +1,25 @@
 package com.example.schoolmanagement.dto;
 
 public class ClassRoutineDTO {
-    private Integer id;
-    private String className;
-    private String subject;
-    private String teacherId;
-    private String teacherName;
-    private String dayOfWeek;
-    private String startTime;
+    private Integer  id;          // optional unique id
+    private String  className;    // e.g. "Grade 8"
+    private String  subject;      // e.g. "Math"
+    private String dayOfWeek;    // e.g. "Monday"
+    private String startTime;    // e.g. "09:00"
     private String endTime;
+
+    private TeacherDTO teacherDTO;
 
     public ClassRoutineDTO() {}
 
-    public ClassRoutineDTO(Integer id, String className, String subject, String teacherId,
-                           String teacherName, String dayOfWeek, String startTime, String endTime) {
+    public ClassRoutineDTO(Integer id, String className, String subject, String dayOfWeek, String startTime, String endTime, TeacherDTO teacherDTO) {
         this.id = id;
         this.className = className;
         this.subject = subject;
-        this.teacherId = teacherId;
-        this.teacherName = teacherName;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.teacherDTO = teacherDTO;
     }
 
     public Integer getId() {
@@ -48,22 +46,6 @@ public class ClassRoutineDTO {
         this.subject = subject;
     }
 
-    public String getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
     public String getDayOfWeek() {
         return dayOfWeek;
     }
@@ -86,5 +68,13 @@ public class ClassRoutineDTO {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public TeacherDTO getTeacherDTO() {
+        return teacherDTO;
+    }
+
+    public void setTeacherDTO(TeacherDTO teacherDTO) {
+        this.teacherDTO = teacherDTO;
     }
 }

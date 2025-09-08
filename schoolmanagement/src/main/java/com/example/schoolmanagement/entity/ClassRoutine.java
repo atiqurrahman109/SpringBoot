@@ -1,9 +1,6 @@
 package com.example.schoolmanagement.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class ClassRoutine {
@@ -13,24 +10,25 @@ public class ClassRoutine {
     private Integer  id;          // optional unique id
     private String  className;    // e.g. "Grade 8"
     private String  subject;      // e.g. "Math"
-    private String teacherId;    // link to teacher
-    private String  teacherName; // optional, populated when joining with teacher data
     private String dayOfWeek;    // e.g. "Monday"
     private String startTime;    // e.g. "09:00"
     private String endTime;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name =" teacher_id")
+    private Teacher  teacher;
+
     public ClassRoutine() {
     }
 
-    public ClassRoutine(Integer id, String className, String subject, String teacherId, String teacherName, String dayOfWeek, String startTime, String endTime) {
+    public ClassRoutine(Integer id, String className, String subject, String dayOfWeek, String startTime, String endTime, Teacher teacher) {
         this.id = id;
         this.className = className;
         this.subject = subject;
-        this.teacherId = teacherId;
-        this.teacherName = teacherName;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.teacher = teacher;
     }
 
     public Integer getId() {
@@ -57,22 +55,6 @@ public class ClassRoutine {
         this.subject = subject;
     }
 
-    public String getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
     public String getDayOfWeek() {
         return dayOfWeek;
     }
@@ -95,5 +77,13 @@ public class ClassRoutine {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }
