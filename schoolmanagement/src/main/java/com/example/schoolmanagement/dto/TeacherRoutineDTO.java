@@ -1,12 +1,6 @@
-package com.example.schoolmanagement.entity;
+package com.example.schoolmanagement.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-public class ClassRoutine {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TeacherRoutineDTO {
     private Integer  id;          // optional unique id
     private String  className;    // e.g. "Grade 8"
     private String  subject;      // e.g. "Math"
@@ -14,14 +8,11 @@ public class ClassRoutine {
     private String startTime;    // e.g. "09:00"
     private String endTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name =" teacher_id")
-    private Teacher  teacher;
+    private TeacherDTO teacher;
 
-    public ClassRoutine() {
-    }
+    public TeacherRoutineDTO() {}
 
-    public ClassRoutine(Integer id, String className, String subject, String dayOfWeek, String startTime, String endTime, Teacher teacher) {
+    public TeacherRoutineDTO(Integer id, String className, String subject, String dayOfWeek, String startTime, String endTime, TeacherDTO teacher) {
         this.id = id;
         this.className = className;
         this.subject = subject;
@@ -79,11 +70,11 @@ public class ClassRoutine {
         this.endTime = endTime;
     }
 
-    public Teacher getTeacher() {
+    public TeacherDTO getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher) {
+    public void setTeacher(TeacherDTO teacher) {
         this.teacher = teacher;
     }
 }

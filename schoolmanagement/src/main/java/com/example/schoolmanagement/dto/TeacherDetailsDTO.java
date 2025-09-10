@@ -1,39 +1,26 @@
-package com.example.schoolmanagement.entity;
+package com.example.schoolmanagement.dto;
 
-import jakarta.persistence.*;
+public class TeacherDetailsDTO {
 
-import java.util.List;
+    private Integer   id;          // Optional - for updates
+    private String  firstName;
+    private String   lastName;
+    private String   dob;         // ISO date string e.g. "1985-07-15"
+    private String   gender;
+    private String   email;
+    private String   phone;
+    private String   address;
+    private String   qualification; // e.g. "B.Sc in Mathematics"
+    private String  experience;     // in years
+    private String  subject;        // e.g. "Mathematics"
+    private String   joiningDate;
 
-@Entity
-@Table(name = "teachers")
-public class Teacher {
+    private TeacherRoutineDTO teacher;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Integer id;          // Optional - for updates
-    private String firstName;
-    private String lastName;
-    private String dob;         // ISO date string e.g. "1985-07-15"
-    private String gender;
-    private String email;
-    private String phone;
-    private String address;
-    private String qualification; // e.g. "B.Sc in Mathematics"
-    private String experience;     // in years
-    private String subject;        // e.g. "Mathematics"
-    private String joiningDate;
-
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    private List<TeacherRoutine> teacherRoutines;
-
-    @OneToMany(mappedBy = "teacher" ,cascade = CascadeType.ALL)
-    private List<TeacherDetails> TeacherDetails;
-
-    public Teacher() {
+    public TeacherDetailsDTO() {
     }
 
-    public Teacher(Integer id, String firstName, String lastName, String dob, String gender, String email, String phone, String address, String qualification, String experience, String subject, String joiningDate) {
+    public TeacherDetailsDTO(Integer id, String firstName, String lastName, String dob, String gender, String email, String phone, String address, String qualification, String experience, String subject, String joiningDate, TeacherRoutineDTO teacher) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -46,6 +33,7 @@ public class Teacher {
         this.experience = experience;
         this.subject = subject;
         this.joiningDate = joiningDate;
+        this.teacher = teacher;
     }
 
     public Integer getId() {
@@ -142,5 +130,13 @@ public class Teacher {
 
     public void setJoiningDate(String joiningDate) {
         this.joiningDate = joiningDate;
+    }
+
+    public TeacherRoutineDTO getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(TeacherRoutineDTO teacher) {
+        this.teacher = teacher;
     }
 }

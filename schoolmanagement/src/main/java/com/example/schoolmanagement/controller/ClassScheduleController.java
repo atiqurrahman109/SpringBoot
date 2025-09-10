@@ -38,5 +38,10 @@ public class ClassScheduleController {
        return classScheduleService.getAllClassScheduleDTOS();
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteSchedule(@PathVariable Integer id) {
+        classScheduleService.deleteClassScheduleById(id);
+    }
+
 
 }

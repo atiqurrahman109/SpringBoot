@@ -1,6 +1,18 @@
-package com.example.schoolmanagement.dto;
+package com.example.schoolmanagement.entity;
 
-public class ClassRoutineDTO {
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+public class TeacherRoutine {
+
+    // eta teachers routine entity
+
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer  id;          // optional unique id
     private String  className;    // e.g. "Grade 8"
     private String  subject;      // e.g. "Math"
@@ -8,18 +20,24 @@ public class ClassRoutineDTO {
     private String startTime;    // e.g. "09:00"
     private String endTime;
 
-    private TeacherDTO teacherDTO;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name =" teacher_id")
+    private Teacher  teacher;
 
-    public ClassRoutineDTO() {}
+    @OneToMany(mappedBy = "teacherRoutine" ,cascade = CascadeType.ALL)
+    private List<TeacherDetails> TeacherDetails;
 
-    public ClassRoutineDTO(Integer id, String className, String subject, String dayOfWeek, String startTime, String endTime, TeacherDTO teacherDTO) {
+    public TeacherRoutine() {
+    }
+
+    public TeacherRoutine(Integer id, String className, String subject, String dayOfWeek, String startTime, String endTime, Teacher teacher) {
         this.id = id;
         this.className = className;
         this.subject = subject;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.teacherDTO = teacherDTO;
+        this.teacher = teacher;
     }
 
     public Integer getId() {
@@ -70,11 +88,11 @@ public class ClassRoutineDTO {
         this.endTime = endTime;
     }
 
-    public TeacherDTO getTeacherDTO() {
-        return teacherDTO;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherDTO(TeacherDTO teacherDTO) {
-        this.teacherDTO = teacherDTO;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

@@ -70,6 +70,10 @@ public class ClassScheduleService {
         }).toList();
     }
 
+    public void deleteClassScheduleById(int id) {
+        classScheduleRepo.deleteById(id);
+    }
+
 
 }
 
