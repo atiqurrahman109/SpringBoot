@@ -5,27 +5,24 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="teachers")
+@Table(name = "teachers")
 public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
- private Integer   id;          // Optional - for updates
-  private String  firstName;
- private String   lastName;
- private String   dob;         // ISO date string e.g. "1985-07-15"
- private String   gender;
- private String   email;
- private String   phone;
- private String   address;
- private String   qualification; // e.g. "B.Sc in Mathematics"
-  private String  experience;     // in years
-  private String  subject;        // e.g. "Mathematics"
- private String   joiningDate;
-
- @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
- private List<ClassSchedule> classSchedules;
+    private Integer id;          // Optional - for updates
+    private String firstName;
+    private String lastName;
+    private String dob;         // ISO date string e.g. "1985-07-15"
+    private String gender;
+    private String email;
+    private String phone;
+    private String address;
+    private String qualification; // e.g. "B.Sc in Mathematics"
+    private String experience;     // in years
+    private String subject;        // e.g. "Mathematics"
+    private String joiningDate;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private List<ClassRoutine> classRoutines;

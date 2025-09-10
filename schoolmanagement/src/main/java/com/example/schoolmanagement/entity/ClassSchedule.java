@@ -6,26 +6,21 @@ import jakarta.persistence.*;
 @Table(name = "schedule")
 public class ClassSchedule {
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
- private Integer   id;                // Schedule ID
- private String  className;         // Class name (e.g., Grade 5, Class A)
- private String   section;           // Section (e.g., A, B)
- private String   subject;           // Subject name (e.g., Math, English
- private String   dayOfWeek;         // Day of the week (e.g., Monday)
- private String   startTime;         // Start time (HH:mm format)
- private String   endTime;
-
- @ManyToOne(fetch = FetchType.LAZY)
- @JoinColumn(name = "teacher_id")
- private Teacher teacher;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;                // Schedule ID
+    private String className;         // Class name (e.g., Grade 5, Class A)
+    private String section;           // Section (e.g., A, B)
+    private String subject;           // Subject name (e.g., Math, English
+    private String dayOfWeek;         // Day of the week (e.g., Monday)
+    private String startTime;         // Start time (HH:mm format)
+    private String endTime;
 
 
     public ClassSchedule() {
     }
 
-    public ClassSchedule(Integer id, String className, String section, String subject, String dayOfWeek, String startTime, String endTime, Teacher teacher) {
+    public ClassSchedule(Integer id, String className, String section, String subject, String dayOfWeek, String startTime, String endTime) {
         this.id = id;
         this.className = className;
         this.section = section;
@@ -33,7 +28,6 @@ public class ClassSchedule {
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.teacher = teacher;
     }
 
     public Integer getId() {
@@ -92,11 +86,4 @@ public class ClassSchedule {
         this.endTime = endTime;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
 }

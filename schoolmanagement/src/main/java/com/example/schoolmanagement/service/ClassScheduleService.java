@@ -16,11 +16,10 @@ import java.util.Optional;
 public class ClassScheduleService {
 
 
-
-        @Autowired
-        private ClassScheduleRepo classScheduleRepo;
-        @Autowired
-        private TeacherRepo teacherRepo;
+    @Autowired
+    private ClassScheduleRepo classScheduleRepo;
+    @Autowired
+    private TeacherRepo teacherRepo;
 
 //        // Create or Update
 //        public ClassSchedule saveSchedule(ClassSchedule schedule) {
@@ -43,14 +42,7 @@ public class ClassScheduleService {
 //        }
 
 
-
-
-
-
-
-
 //    test
-
 
 
     public List<ClassSchedule> getAllSchedules() {
@@ -58,16 +50,8 @@ public class ClassScheduleService {
     }
 
     public ClassSchedule saveOrUpdate(ClassSchedule classSchedule) {
-        Teacher teacher = teacherRepo.findById(classSchedule.getTeacher().getId())
-                .orElseThrow(() -> new RuntimeException("Production Order not found with id: " + classSchedule.getTeacher().getId()));
-
-
-        classSchedule.setTeacher(teacher);
-
-
-        return  classScheduleRepo.save(classSchedule);
+        return classScheduleRepo.save(classSchedule);
     }
-
 
 
     public List<ClassScheduleDTO> getAllClassScheduleDTOS() {
@@ -82,30 +66,11 @@ public class ClassScheduleService {
             dto.setEndTime(clScheule.getEndTime());
             dto.setSubject(clScheule.getSubject());
 
-
-
-
-            Teacher teacher = clScheule.getTeacher();
-            if (teacher != null) {
-                TeacherDTO teacherDTO = new TeacherDTO();
-                teacherDTO.setId(teacherDTO.getId());
-                teacherDTO.setFirstName(teacher.getFirstName());
-
-                dto.setTeacher(teacherDTO);
-
-
-            }
-
-
-
             return dto;
         }).toList();
     }
 
 
-
-
-
-    }
+}
 
 
