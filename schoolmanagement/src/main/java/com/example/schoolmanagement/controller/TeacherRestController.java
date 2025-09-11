@@ -33,4 +33,10 @@ public class TeacherRestController {
     public Optional<Teacher> findById(@PathVariable Integer id){
         return teacherService.findById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id){
+       teacherService.deleteTeacher(id);
+    }
+
 }

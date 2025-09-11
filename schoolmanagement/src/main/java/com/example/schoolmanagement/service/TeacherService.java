@@ -72,4 +72,8 @@ public class TeacherService {
             return dto;
         }).toList();
     }
+
+    public void deleteTeacher(Integer id) {
+        teacherRepo.deleteById(id);
+    }
 }
